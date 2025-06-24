@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {},
+	"extensions": {
+		"recommendations": [
+			"github.vscode-pull-request-github",
+			"github.copilot-chat",
+			"visualstudioexptteam.vscodeintellicode",
+			"ms-toolsai.jupyter",
+			"ms-python.vscode-pylance"
+		]
+	}
+}
