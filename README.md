@@ -3,15 +3,30 @@
 
 The notebook [`assignment_1.ipynb`](./assignment-1/assignment-1.ipynb) scrapes various classified ads from JIJI - [https://www.jiji.co.ke](https://www.jiji.co.ke) and saves the data to JSON files and a CSV file.
 
-## Install & Run
+### Install & Run
 1. Install requirements: `pip install -r requirements.txt`
 2. Run the notebook: [`assignment_1.ipynb`](./assignment-1/assignment-1.ipynb)
 3. Check the output files in the `output` directory.
 
-## How-To
+### How-To
 1. Scoped out webpages;
    - for this case, JIJI - [https://www.jiji.co.ke](https://www.jiji.co.ke) and subpages for vehicles, electronics, property, and home appliances. Each page has a number of classified ads.
 2. Identified the data to scrape; for this case, the title, price, and description of each ad. Using browser developer tools, the HTML structure was inspected to find the relevant tags and classes. See screenshots in the [`screenshots`](./assignment-1/screenshots/) directory.
 3. Used BeautifulSoup to parse the HTML and extract the data. The code iterates through each ad, finds the relevant tags, and extracts the text.
 4. Saved the data to JSON files and a CSV file in an `output` directory created in the current working directory.
-5. *TODO: Use Selenium to beat pagination*
+
+## Assignment 2 - Multi-Page Web Scraping
+
+The script [`webscraper-io.py`](./assignment-2/webscraper-io.py) scrapes book data from all 20 pages of [Web Scraper for Laptops Test Site](https://webscraper.io/test-sites/e-commerce/static/computers/laptops), extracting the **Title**, **Price**, and **Description** of each laptop.
+
+### Features:
+- Uses `httpx` and `BeautifulSoup` for fast, clean scraping.
+- Handles errors gracefully using `try...except`.
+- Includes `time.sleep()` delays to avoid overloading the server.
+- Cleans all extracted text using `.strip()`.
+- Saves results to a well-formatted CSV file: `my_books.csv`.
+
+### How-To:
+1. Scripts are in the [`assignment-2`](./assignment-2/) directory.
+2. Install requirements and setup in Step 1.
+3. Run the script [`webscraper-io.py`](./assignment-2/webscraper-io.py) 
