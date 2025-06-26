@@ -38,6 +38,6 @@ The script [`webscraper-io.py`](./assignment-2/webscraper-io.py) scrapes book da
 
 ## Assignment 2 Part 2 - Multi-Page Web Scraping on Jumia, with Selenium
 
-The script [`jumiascraper.py`](./assignment-2/jumiascraper.py) is a advanced web scraper for extracting product data from Jumia Kenya's home appliances section using Selenium WebDriver. Selenium handles dynamic JavaScript content that static scrapers can't access and automatically navigates through product listing pages.
+The script [`jumia_scraper.py`](./assignment-2/jumia_scraper.py) is a advanced web scraper for extracting product data from Jumia Kenya's home appliances section using Selenium WebDriver. Selenium handles dynamic JavaScript content that static scrapers can't access and automatically navigates through product listing pages.
 The title, price, old price, discount, ratings, reviews, and shipping info are collected and saved.
 Slight robots.txt compliance; includes rate limiting and respectful crawling practices.

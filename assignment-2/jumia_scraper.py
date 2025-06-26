@@ -1,8 +1,7 @@
-# Requirements: bs4 (BeautifulSoup), selenium, webdriver-manager
-# pip install beautifulsoup4 selenium webdriver-manager 
-
 import csv
+import json
 import time
+import uuid
 from bs4 import BeautifulSoup
 from typing import Any
 import selenium
@@ -45,7 +44,7 @@ def parse_appliance_page(html: str) -> list:
     products = []
 
     product_cards = soup.select("article.prd._fb.col.c-prd") # Extract all product cards
-    print(f"Found {len(product_cards)} product cards on this page")
+    print(f"Found {len(product_cards)} product cards on this page", end=None)
 
     for card in product_cards:
         try:
@@ -100,7 +99,10 @@ def parse_appliance_page(html: str) -> list:
             if info.select_one("svg.ic.xprss"):
                 shipping = "Express"
 
-            products.append([title, price, old_price, discount, badge, rating, num_reviews, shipping])
+            # Generate 4-character UUID for product
+            product_id = str(uuid.uuid4())[:4].upper()
+
+            products.append([product_id, title, price, old_price, discount, badge, rating, num_reviews, shipping])
         
         except Exception as e:
             print(f"[!] Skipping product due to error: {e}")
@@ -110,7 +112,7 @@ def parse_appliance_page(html: str) -> list:
 
 def save_to_csv(products, filename):
     """Save products to CSV file"""
-    headers = ["Title", "Price", "Old Price", "Discount", "Badge", "Rating", "Number of Reviews", "Shipping"]
+    headers = ["Product_ID", "Title", "Price", "Old Price", "Discount", "Badge", "Rating", "Number of Reviews", "Shipping"]
     
     with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
@@ -119,18 +121,34 @@ def save_to_csv(products, filename):
     
     print(f"✅ Saved {len(products)} products to {filename}")
 
+def save_to_json(products, filename):
+   """Save products to JSON file with Product_ID as keys"""
+   headers = ["Product_ID", "Title", "Price", "Old Price", "Discount", "Badge", "Rating", "Number of Reviews", "Shipping"]
+   
+   # Convert list of lists to dictionary with Product_ID as keys
+   products_dict = {}
+   for product in products:
+       product_id = product[0]  # First element is Product_ID
+       product_data = {headers[i]: product[i] for i in range(1, len(headers))}  # Skip Product_ID in the data
+       products_dict[product_id] = product_data
+   
+   with open(filename, 'w', encoding='utf-8') as jsonfile:
+       json.dump(products_dict, jsonfile, indent=2, ensure_ascii=False)
+   
+   print(f"✅ Saved {len(products)} products to {filename}")
+
 def main() -> None:
     import pathlib
     OUTPUT_DIR = pathlib.Path(__file__).parent / "output"
     OUTPUT_DIR.mkdir(exist_ok=True)  # Ensure output directory exists
-    OUTPUT_FILE = OUTPUT_DIR / "jumia_appliances.csv"
+    OUTPUT_CSV = OUTPUT_DIR / "jumia_appliances.csv"
+    OUTPUT_JSON = OUTPUT_DIR / "jumia_appliances.json"
 
     driver: WebDriver = setup_driver()
     all_products = [] 
     
     try:
-        # Scrape multiple pages
-        for page_num in range(1, 30):  # Scrape first 10 pages, adjust as needed
+        for page_num in range(1, 11):
             url = f"https://www.jumia.co.ke/home-office-appliances/?page={page_num}#catalog-listing"
             print(f"🕷️  Scraping page {page_num}: {url}")
             
@@ -163,13 +181,11 @@ def main() -> None:
         driver.quit() # Close the browser
     
     if all_products:
-        save_to_csv(products=all_products, filename=OUTPUT_FILE)
+        # Save to both CSV and JSON formats
+        save_to_csv(all_products, OUTPUT_CSV)
+        save_to_json(all_products, OUTPUT_JSON)
         print(f"✅ Scraping complete! Total products scraped: {len(all_products)}")
         
-        # Display first few products as preview
-        print("\n📋 Preview of scraped data:")
-        for i, product in enumerate(all_products[:5]):
-            print(f"{i+1}. {product[0]} - {product[1]}")
     else:
         print("❌ No products were scraped.")
 
