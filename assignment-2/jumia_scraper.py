@@ -62,6 +62,10 @@ def parse_appliance_page(html: str) -> list:
             title = title_elem.text.strip()
             price = price_elem.text.strip()
 
+            # Remove double quotes
+            price = price.replace('"', '').replace(',', '')  # Remove quotes and commas for consistency
+            title = title.replace('"', '').replace("“", '').replace("”", '')  # Remove quotes from title   
+
             # -- Extract optional fields; not identical for every product
             old_price = ""
             discount = ""
@@ -72,7 +76,7 @@ def parse_appliance_page(html: str) -> list:
 
             old_div = info.select_one("div.old") # Old price
             if old_div:
-                old_price = old_div.text.strip()
+                old_price = old_div.text.strip().replace('"', '') # Remove quotes from old price
 
             discount_div = info.select_one("div.bdg._dsct._sm") # Discount
             if discount_div:
@@ -148,7 +152,7 @@ def main() -> None:
     all_products = [] 
     
     try:
-        for page_num in range(1, 11):
+        for page_num in range(1, 4):
             url = f"https://www.jumia.co.ke/home-office-appliances/?page={page_num}#catalog-listing"
             print(f"🕷️  Scraping page {page_num}: {url}")
             
@@ -181,7 +185,7 @@ def main() -> None:
         driver.quit() # Close the browser
     
     if all_products:
-        # Save to both CSV and JSON formats
+        # -- Save to both CSV and JSON formats
         save_to_csv(all_products, OUTPUT_CSV)
         save_to_json(all_products, OUTPUT_JSON)
         print(f"✅ Scraping complete! Total products scraped: {len(all_products)}")
