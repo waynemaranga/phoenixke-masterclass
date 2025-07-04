@@ -15,4 +15,7 @@ dependencies = [
     "requests>=2.32.4",
     "selenium>=4.33.0",
     "webdriver-manager>=4.0.2",
+    "matplotlib>=3.10.3",
+    "seaborn>=0.13.2",
+    "plotly>=6.2.0",
 ]
