@@ -9,9 +9,13 @@ Notes and assignments for the Web Scraping Masterclass by PhoenixKE Analytics.
     - [Install \& Run](#install--run)
     - [How-To](#how-to)
   - [Assignment 2 - Multi-Page Web Scraping](#assignment-2---multi-page-web-scraping)
-    - [Features:](#features)
-    - [How-To:](#how-to-1)
+    - [Features](#features)
+    - [How-To](#how-to-1)
   - [Assignment 2 Part 2 - Multi-Page Web Scraping on Jumia, with Selenium](#assignment-2-part-2---multi-page-web-scraping-on-jumia-with-selenium)
+  - [Assignment 3 - Capstone Project](#assignment-3---capstone-project)
+    - [Features:](#features-1)
+    - [How-To:](#how-to-2)
+
 
 ## Assignment 1 - Intro to Web Scraping
 
@@ -35,7 +39,7 @@ The notebook [`assignment_1.ipynb`](./assignment-1/assignment-1.ipynb) scrapes v
 
 The script [`webscraper-io.py`](./assignment-2/webscraper-io.py) scrapes book data from all 20 pages of [Web Scraper for Laptops Test Site](https://webscraper.io/test-sites/e-commerce/static/computers/laptops), extracting the **Title**, **Price**, and **Description** of each laptop.
 
-### Features:
+### Features
 
 - Uses `httpx` and `BeautifulSoup` for fast, clean scraping.
 - Handles errors gracefully using `try...except`.
@@ -43,7 +47,7 @@ The script [`webscraper-io.py`](./assignment-2/webscraper-io.py) scrapes book da
 - Cleans all extracted text using `.strip()`.
 - Saves results to a well-formatted CSV file: `my_books.csv`.
 
-### How-To:
+### How-To
 
 1. Scripts are in the [`assignment-2/`](./assignment-2/) directory.
 2. Install requirements and setup in Step 1.
@@ -54,3 +58,26 @@ The script [`webscraper-io.py`](./assignment-2/webscraper-io.py) scrapes book da
 The script [`jumia_scraper.py`](./assignment-2/jumia_scraper.py) is a advanced web scraper for extracting product data from Jumia Kenya's home appliances [`[link]`](https://www.jumia.co.ke/home-office-appliances/) section using Selenium WebDriver. Selenium handles dynamic JavaScript content that static scrapers can't access and automatically navigates through product listing pages.
 The title, price, old price, discount, ratings, reviews, and shipping info are collected and saved.
 Slight robots.txt compliance; includes rate limiting and respectful crawling practices.
+
+## Assignment 3 - Capstone Project
+
+The notebook [`Capstone_Project_Group_7.ipynb`](./assignment-3/Capstone_Project_Group_7.ipynb) scrapes book data from [http://books.toscrape.com/](http://books.toscrape.com/). It navigates through multiple book categories and handles pagination within each category.
+
+After scraping, the notebook performs data analysis and visualization on the collected data.
+
+### Features:
+
+- Scrapes data by category and handles multi-page navigation within each.
+- Extracts **Title**, **Price**, **Availability**, and **Star Rating** for each book.
+- Saves the scraped data into separate CSV files for each category (e.g., `travel.csv`, `mystery.csv`).
+- Uses `pandas` for data aggregation and analysis.
+- Utilizes `matplotlib` and `seaborn` to generate several visualizations:
+  - Bar charts for book counts and average prices per category.
+  - Box plots for price and rating distributions.
+  - A heatmap showing star rating distributions across categories.
+
+### How-To:
+
+1. Scripts are in the [`assignment-3/`](./assignment-3/) directory.
+3. Run the notebook: [`Capstone_Project_Group_7.ipynb`](./assignment-3/Capstone_Project_Group_7.ipynb)
+4. Check the `output` directory for the generated CSV files and plots.
