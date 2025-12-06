@@ -1,17 +1,20 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {},
-	"extensions": {
-		"recommendations": [
-			"github.vscode-pull-request-github",
-			"github.copilot-chat",
-			"visualstudioexptteam.vscodeintellicode",
-			"ms-toolsai.jupyter",
-			"ms-python.vscode-pylance"
-		]
-	}
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "sqltools.connections": []
+  },
+  "extensions": {
+    "recommendations": [
+      "github.vscode-pull-request-github",
+      "github.copilot-chat",
+      "visualstudioexptteam.vscodeintellicode",
+      "ms-toolsai.jupyter",
+      "ms-python.vscode-pylance",
+      "mtxr.sqltools-driver-sqlite"
+    ]
+  }
 }
