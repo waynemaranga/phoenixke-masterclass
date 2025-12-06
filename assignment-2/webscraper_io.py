@@ -24,9 +24,9 @@ def scrape_page(page_num: int) -> Optional[list[Any]]:
     items = []
     for box in soup.select(".thumbnail"):
         try:
-            title = box.select_one(".title")["title"].strip()
-            price = box.select_one(".price").text.strip()
-            description = box.select_one(".description").text.strip()
+            title = box.select_one(".title")["title"].strip() # type: ignore
+            price = box.select_one(".price").text.strip() # type: ignore
+            description = box.select_one(".description").text.strip() # type: ignore
             items.append([title, price, description])
         except Exception:
             continue

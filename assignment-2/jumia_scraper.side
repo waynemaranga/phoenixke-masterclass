@@ -1,0 +1,25 @@
+{
+  "id": "67ac823c-b338-47f9-bf8c-4252b38f24e0",
+  "version": "2.0",
+  "name": "jumia_scraper",
+  "url": "https://www.jumia.co.ke/home-office-appliances/",
+  "tests": [{
+    "id": "b6589f92-9fba-4b8d-813d-c528d2bab7b6",
+    "name": "Untitled",
+    "commands": []
+  }, {
+    "id": "d8214ba2-2692-4eb1-81d1-1c9f999156c0",
+    "name": "page_1",
+    "commands": []
+  }],
+  "suites": [{
+    "id": "2366f2c7-6394-41cd-aa3f-d00ea20fe9d0",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["b6589f92-9fba-4b8d-813d-c528d2bab7b6"]
+  }],
+  "urls": ["https://www.jumia.co.ke/home-office-appliances/"],
+  "plugins": []
+}
